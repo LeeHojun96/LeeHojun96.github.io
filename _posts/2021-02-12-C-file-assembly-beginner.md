@@ -1,3 +1,9 @@
+---
+layout : post
+title : 프로그램이 기본 구성들의 어셈블리어 변환
+---
+
+
 # 1. main 함수
 시작 명령어 : CALL main 
 어떤 함수들이 사전 사후에 call되는지 : stub
