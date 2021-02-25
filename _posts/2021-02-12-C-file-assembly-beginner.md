@@ -1,5 +1,5 @@
 ---
-layout : post
+layout : single
 title : 프로그램이 기본 구성들의 어셈블리어 변환
 ---
 
