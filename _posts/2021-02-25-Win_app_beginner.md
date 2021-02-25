@@ -1,4 +1,6 @@
 ---
+
+layout : single
 title:  "Win Application 기본"
 excerpt: "기본이 되는 Win app 개발 함수 정리"
 
