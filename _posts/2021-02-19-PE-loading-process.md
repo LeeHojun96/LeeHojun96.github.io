@@ -1,4 +1,5 @@
 ---
+layout : single
 title: "PE loading process"
 excerpt: "PE 파일이 메모리로 로딩되는 과정을 간단하게 정리"
 toc: true
@@ -7,6 +8,7 @@ toc_sticky: true
 date: 2021-02-19
 last_modified_at: 2021-02-25
 ---
+
 
 # 1. PE 파일 구조 분석
 
