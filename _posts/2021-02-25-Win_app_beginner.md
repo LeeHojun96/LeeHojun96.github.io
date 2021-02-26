@@ -29,7 +29,7 @@ Link 2 - Windows Hello World 샘플 다운로드: https://docs.microsoft.com/en-
 Link 3 - Win32 API 문서 (기능 기준): https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list
 Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/windows
 -->
-## 0. 개요
+# 0. 개요
 
 #### 1) 목표
 
@@ -43,7 +43,7 @@ Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/w
 
 - 샘플 프로그램 기능 : 사용자가 종료 전까지 빈 윈도우 창을 띄움.
 
-## 1. 사용할 문자셋(character set) 정의     
+# 1. 사용할 문자셋(character set) 정의     
 
 ```cpp
 #ifndef UNICODE
@@ -88,7 +88,7 @@ Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/w
   ```  
 
 
-## 2. main 함수 부분
+# 2. main 함수 부분
 
 #### 1) 전체 main 함수 형태
 
@@ -269,7 +269,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
 
 
 
-## 3. Window procedure 함수
+# 3. Window procedure 함수
 
 ```cpp
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -346,7 +346,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - default message handler
   - 따로 처리하지 않을 몇몇 메세지들을 이 함수로 넘겨 디폴트대로 처리함.
 
-## 4. 정리
+# 4. 정리
 
 #### 1) 윈도우 프로그래밍의 기본 형태
 
