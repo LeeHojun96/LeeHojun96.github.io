@@ -268,7 +268,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
   - 위에 있는 WindowProc를 콜하는 것
 
 
-# 3. Window procedure 함수  
+# 3. Window procedure
 
 ```cpp
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
