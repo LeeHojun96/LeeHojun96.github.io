@@ -107,7 +107,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 #### 2) main 함수 내 세부 단계
 
-(1) window class 생성 단계   
+###### (1) window class 생성 단계   
 
 ```cpp
   // Register the window class.
@@ -156,7 +156,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 - RegisterClass 함수로 생성한 window class 등록
 RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이런 특성을 가진 윈도우를 앞으로 사용하겠다'는 등록 과정이며 OS는 이 윈도우 클래스의 특성을 기억해둠.
 
-(2) 윈도우 창 생성 단계
+###### (2) 윈도우 창 생성 단계
 
 ```cpp
     // Create the window.
@@ -222,7 +222,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
 - 핸들이 정상적으로 전달됐으면 ShowWindow()로 윈도우 창을 사용자에게 보여줌
   - nCmdShow : 윈도우의 최대화, 최소화할 때 사용되는 값으로 main 함수의 인자를 통해 전달됨.
 
-(3) 메세지 루프 부분
+###### (3) 메세지 루프 부분
 
 ```cpp
     // Run the message loop.
