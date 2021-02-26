@@ -268,8 +268,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
   - 위에 있는 WindowProc를 콜하는 것
 
 
-
-# 3. Window procedure 함수
+# 3. Window procedure 함수  
 
 ```cpp
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -306,7 +305,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - uMsg : 전달받을 메세지 코드
   - wParam과 lParam : 메세지 코드에 따라 의미가 달라지는, 추가적인 데이터들
 
-## 2) WindowProc() 내용
+## 2) WindowProc() 내용  
 
 - 위 DispatchMessage() 함수로 call될 window procedure를 정의
 - switch 문
@@ -346,9 +345,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - default message handler
   - 따로 처리하지 않을 몇몇 메세지들을 이 함수로 넘겨 디폴트대로 처리함.
 
-# 4. 정리
+# 4. 정리 
 
-## 1) 윈도우 프로그래밍의 기본 형태
+## 1) 윈도우 프로그래밍의 기본 형태 
 
   - 윈도우 클래스 지정 (WNDCLASS)
   - 윈도우 클래스 등록 (RegisterClass)
@@ -357,6 +356,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - 메시지 처리함수 작성 (WindowProc)
 
 
-## 2) 참조
+## 2) 참조 
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-a-window
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/window-messages
