@@ -13,9 +13,22 @@ toc: true
 toc_sticky: true
 
 date: 2021-02-25
-last_modified_at: 2021-02-25
+last_modified_at: 2021-02-26
 ---
+<!--
+과제
+4주차 과제는 Windows 데스크톱 앱 개발로 5주차 과제에 선행하여 필요합니다.
+- [필수 1] 직접 프로젝트를 생성하거나 샘플을 다운받아서 Windows 데스크톱 앱을 만듭니다. (Link 1, 2)
+- [필수 2] 소스 코드를 설명합니다. 주석을 달아도 되고 소스코드와 별도로 각 요소들을 설명하는 글을 작성해도 좋습니다. 함수 정보는 Microsoft Docs에서 검색해주세요.
+- [선택 1] Windows의 창에 대해 배우고 이를 응용하여 그림을 그리거나 창을 닫기 전 알림을 띄우는 등의 코드를 작성해봅니다.
+- [선택 2] 작성한 Windows 데스크톱 앱을 x86-32 디버거(Visual Studio 내장 디버거, x64dbg 등)를 사용하여 소스코드와 비교하며 관찰합니다.
+- [선택 3] Windows의 클래스, 프로시저, 메시지 등에 대해 공부합니다. (Link 4)
 
+Link 1 - 최소한의 Windows 데스크톱 프로그램 작성: https://docs.microsoft.com/en-us/windows/win32/learnwin32/your-first-windows-program
+Link 2 - Windows Hello World 샘플 다운로드: https://docs.microsoft.com/en-us/windows/win32/learnwin32/windows-hello-world-sample
+Link 3 - Win32 API 문서 (기능 기준): https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list
+Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/windows
+-->
 ## 0. 개요
 
 #### 1) 목표
@@ -25,7 +38,9 @@ last_modified_at: 2021-02-25
 #### 2) 분석 대상
 
 - 분석할 샘플 프로그램 소스
+
   - minimal Windows desktop program : https://docs.microsoft.com/en-us/windows/win32/learnwin32/your-first-windows-program
+
 - 샘플 프로그램 기능 : 사용자가 종료 전까지 빈 윈도우 창을 띄움.
 
 ## 1. 사용할 문자셋(character set) 정의     
@@ -252,7 +267,6 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
   - OS로 하여 window procedure를 call하도록 함.
   - 위에 있는 WindowProc를 콜하는 것
 
-- while 문을 이용해 빈 창을 계속 띄우는 단계
 
 
 ## 3. Window procedure 함수
@@ -307,11 +321,24 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     - 윈도우에서의 paint 의미 : 윈도우 창 안에서 무언가를 보여주는 것
     - 윈도우를 paint하라고 보내는 메세지 코드 :    
-    예시) 윈도우 창을 만들면서 OS는 이 창을 paint하라고 사용자에게 WM_PAINT 메세지를 보냄. 즉, 윈도우를 show하려면 사용자는 최소 한번 이상의 WM_PAINT 메세지를 받게 되는 것.   
-    창을 업데이트하면서 창의 일부를 다시 repaint하라고 해당 메세지 코드를 보내기도 함.
+    예시)   
+
+      - 윈도우 창을 만들면서 OS는 이 창을 paint하라고 사용자에게 WM_PAINT 메세지를 보냄. 즉, 윈도우를 show하려면 사용자는 최소 한번 이상의 WM_PAINT 메세지를 받게 되는 것.   
+      - 창을 업데이트하면서 창의 일부를 다시 repaint하라고 해당 메세지 코드를 보내기도 함.
+      - 다른 창에 가려져있던 일부가 드러나게 되는 경우 update하기 위.
+
     - BeginPaint()와 EndPaint()
       painting 연산의 시작과 끝을 선언. 이 사이에서 모든 painting 작업이 이뤄져야 함.
     - FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
+
+      - HBRUSH 구조체라는 브러쉬로 사각형을 색칠하는 함수
+      - rcPaint는 PAINTSTRUCT의 멤버변수로 사각형의 좌표에 대한 정보
+      - 위 코드의 경우 update된 전체 영역을 rcPaint로 넘김
+        ```cpp
+        PAINTSTRUCT ps;   //멤버변수 rcPaint의 초기화값이 창의 좌표로 추정
+        HDC hdc = BeginPaint(hwnd, &ps);
+        FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
+        ```
 
 
 - DefWindowProc() 부분
@@ -321,7 +348,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 ## 4. 정리
 
-###### 윈도우 프로그래밍의 기본 형태
+#### 1) 윈도우 프로그래밍의 기본 형태
 
   - 윈도우 클래스 지정 (WNDCLASS)
   - 윈도우 클래스 등록 (RegisterClass)
@@ -330,6 +357,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - 메시지 처리함수 작성 (WindowProc)
 
 
-참조 :   
+#### 2) 참조
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-a-window
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/window-messages
