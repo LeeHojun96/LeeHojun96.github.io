@@ -233,16 +233,24 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
 
   - MSG 구조체로 관리됨
   - OS는 윈도우를 만든 쓰레드마다 메세지 큐를 만들어 관리함.
-  
+
 - GetMessage()
 
-  - 앞서 말한 메세지 큐에서 하나의 메시지를 가져오는 함수
+  - 앞서 말한 메세지 큐에서 하나의 메세지를 POP하여 첫번째 파라미터 msg에 저장하는 함수
 
+- TranslateMessage(&msg);
+
+  - 키보드 입력과 관련된 함수로 key stroke을 character로 바꿔줌
+  - DispatchMessage() 이전에 call됨
+
+- DispatchMessage(&msg);
+  - OS로 하여 window procedure를 call하도록 함.
+  - 위에 있는 WindowProc를 콜하는 것
 
 - while 문을 이용해 빈 창을 계속 띄우는 단계
 
 
-## 3. main 외 함수 : WindowProc()
+## 3. Window procedure 함수
 
 ```cpp
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -271,15 +279,33 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 ```
 
+#### 1) WindowProc() 구조
+
+- 파라미터
+
+  - hwnd : 윈도우의 핸들
+  - uMsg : 전달받을 메세지 코드
+  - wParam과 lParam : 메세지 코드에 따라 의미가 달라지는, 추가적인 데이터들
+
+#### 2) WindowProc() 내용
+
+- 위 DispatchMessage() 함수로 call될 window procedure를 정의
+- switch 문
+  - 입력받은 메세지 코드에 따라 분기됨
+
+- DefWindowProc() 부분
+  - default message handler
+  - 따로 처리하지 않을 몇몇 메세지들을 이 함수로 넘겨 디폴트대로 처리함.
+
 ## 4. 정리
 ###### 윈도우 프로그래밍의 기본 형태
   - 윈도우 클래스 지정 (WNDCLASS)
   - 윈도우 클래스 등록 (RegisterClass)
-  - 윈도우 생성 및 업데이트 (CreateWindow및 UpdateWindow)
+  - 윈도우 생성 및 업데이트 (CreateWindow 및 UpdateWindow)
   - 메시지 루프 (GetMessage 루프)
-  - 메시지 처리함수 작성 (WndProc)
+  - 메시지 처리함수 작성 (WindowProc)
 
 
-참조 :
+참조 :   
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-a-window
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/window-messages
