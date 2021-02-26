@@ -29,13 +29,13 @@ Link 2 - Windows Hello World 샘플 다운로드: https://docs.microsoft.com/en-
 Link 3 - Win32 API 문서 (기능 기준): https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list
 Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/windows
 -->
-#0. 개요
+# 0. 개요
 
-##0.1. 목표
+## 0.1. 목표
 
 - 가장 기본적인 Windows application의 소스코드 분석
 
-##0.2. 분석 대상
+## 0.2. 분석 대상
 
 - 분석할 샘플 프로그램 소스
 
@@ -43,7 +43,7 @@ Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/w
 
 - 샘플 프로그램 기능 : 사용자가 종료 전까지 빈 윈도우 창을 띄움.
 
-#1. 사용할 문자셋(character set) 정의     
+# 1. 사용할 문자셋(character set) 정의     
 
 ```cpp
 #ifndef UNICODE
@@ -53,12 +53,12 @@ Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/w
 #include <windows.h>
 ```
 
-##1.1. 'windows.h' 헤더
+## 1.1. 'windows.h' 헤더
 
 - Windows 스타일 자료형이 정의되어 있는
 - CHAR, WCHAR, LPSTR 등이 정의되어 있음
 
-##1.2. 매크로 UNICODE
+## 1.2. 매크로 UNICODE
 
 - 매크로 UNICODE와 'windows.h'와 같이 사용하여 WBCS의 지원.
 - WBCS(Wide Byte Character Set) : 모든 문자를 2바이트로 표현하는 방식. 보통 유니코드 기반으로 함.
@@ -88,9 +88,9 @@ Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/w
   #endif
   ```  
 
-#2. main 함수 부분
+# 2. main 함수 부분
 
-##2.1. 전체 main 함수 형태
+## 2.1. 전체 main 함수 형태
 
 ```cpp
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
@@ -105,9 +105,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
   = main 함수에 전달되는 인자를 유니코드 기반으로 구성함(ex. L"test.exe")
   - 프로그램의 *entry point*
 
-##2.2. main 함수 내 세부 단계
+## 2.2. main 함수 내 세부 단계
 
-####2.2.1. window class 생성 단계
+#### 2.2.1. window class 생성 단계
 
 ```cpp
   // Register the window class.
@@ -156,7 +156,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 - RegisterClass 함수로 생성한 window class 등록
 RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이런 특성을 가진 윈도우를 앞으로 사용하겠다'는 등록 과정이며 OS는 이 윈도우 클래스의 특성을 기억해둠.
 
-####2.2.2. 윈도우 창 생성 단계
+#### 2.2.2. 윈도우 창 생성 단계
 
 ```cpp
     // Create the window.
@@ -222,7 +222,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
 - 핸들이 정상적으로 전달됐으면 ShowWindow()로 윈도우 창을 사용자에게 보여줌
   - nCmdShow : 윈도우의 최대화, 최소화할 때 사용되는 값으로 main 함수의 인자를 통해 전달됨.
 
-####2.2.3. 메세지 루프 부분
+#### 2.2.3. 메세지 루프 부분
 
 ```cpp
     // Run the message loop.
@@ -267,7 +267,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
   - OS로 하여 window procedure를 call하도록 함.
   - 위에 있는 WindowProc를 콜하는 것
 
-#3. Window procedure
+# 3. Window procedure
 
 ```cpp
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -296,7 +296,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 ```
 
-##3.1. WindowProc() 구조
+## 3.1. WindowProc() 구조
 
 - 파라미터
 
@@ -304,7 +304,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - uMsg : 전달받을 메세지 코드
   - wParam과 lParam : 메세지 코드에 따라 의미가 달라지는, 추가적인 데이터들
 
-##3.2. WindowProc() 내용
+## 3.2. WindowProc() 내용
 
 - 위 DispatchMessage() 함수로 call될 window procedure를 정의
 - switch 문
@@ -343,9 +343,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - default message handler
   - 따로 처리하지 않을 몇몇 메세지들을 이 함수로 넘겨 디폴트대로 처리함.
 
-#4. 정리
+# 4. 정리
 
-##4.1. 윈도우 프로그래밍의 기본 형태
+## 4.1. 윈도우 프로그래밍의 기본 형태
 
   - 윈도우 클래스 지정 (WNDCLASS)
   - 윈도우 클래스 등록 (RegisterClass)
@@ -353,6 +353,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - 메시지 루프 (GetMessage 루프)
   - 메시지 처리함수 작성 (WindowProc)
 
-##4.2. 참조
+## 4.2. 참조
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-a-window
 https://docs.microsoft.com/en-us/windows/win32/learnwin32/window-messages
