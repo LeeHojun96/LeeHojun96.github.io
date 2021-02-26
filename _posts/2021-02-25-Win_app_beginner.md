@@ -237,7 +237,6 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
 ```
 
 - window message 개념
-
   - 언제 발생할지 예측할 수 없는 유저와 OS로부터의 이벤트에 대응하기 위해 등장.   
   ex) 유저의 마우스 클릭, 윈도우 OS의 sleep 모드 등의 이벤트
   - windows OS는 다양한 이벤트마다 대응하는 메세지를 상수값으로 정의함.   
@@ -248,21 +247,17 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
     ```
 
 - window message 관리
-
   - MSG 구조체로 관리됨
   - OS는 윈도우를 만든 쓰레드마다 메세지 큐를 만들어 관리함.
 
 - GetMessage()
-
   - 앞서 말한 메세지 큐에서 하나의 메세지를 POP하여 첫번째 파라미터 msg에 저장하는 함수
 
 - TranslateMessage(&msg);
-
   - 키보드 입력과 관련된 함수로 key stroke을 character로 바꿔줌
   - DispatchMessage() 이전에 call됨
 
 - DispatchMessage(&msg);
-
   - OS로 하여 window procedure를 call하도록 함.
   - 위에 있는 WindowProc를 콜하는 것
 
@@ -299,7 +294,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 ## 3.1. WindowProc() 구조
 
 - 파라미터
-
   - hwnd : 윈도우의 핸들
   - uMsg : 전달받을 메세지 코드
   - wParam과 lParam : 메세지 코드에 따라 의미가 달라지는, 추가적인 데이터들
@@ -308,27 +302,20 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 - 위 DispatchMessage() 함수로 call될 window procedure를 정의
 - switch 문
-
   - 입력받은 메세지 코드에 따라 분기됨
   - WM_DESTROY
-
     - 윈도우가 파괴(destroy)되었을 때 전달되는 메세지 코드
     - PostQuitMessage() 함수 : 시스템에게 쓰레드가 종료 요청을 보냈음을 알려주는 함수. 보통 VM_DESTROY와 같이 쓰임
-
   - WM_PAINT
-
     - 윈도우에서의 paint 의미 : 윈도우 창 안에서 무언가를 보여주는 것
-    - 윈도우를 paint하라고 보내는 메세지 코드 :    
-    예시)   
-
+    - 윈도우를 paint하라고 보내는 메세지 코드 :  
+    예시)
       - 윈도우 창을 만들면서 OS는 이 창을 paint하라고 사용자에게 WM_PAINT 메세지를 보냄. 즉, 윈도우를 show하려면 사용자는 최소 한번 이상의 WM_PAINT 메세지를 받게 되는 것.   
       - 창을 업데이트하면서 창의 일부를 다시 repaint하라고 해당 메세지 코드를 보내기도 함.
       - 다른 창에 가려져있던 일부가 드러나게 되는 경우 update하기 위.
-
     - BeginPaint()와 EndPaint()
       painting 연산의 시작과 끝을 선언. 이 사이에서 모든 painting 작업이 이뤄져야 함.
     - FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
-
       - HBRUSH 구조체라는 브러쉬로 사각형을 색칠하는 함수
       - rcPaint는 PAINTSTRUCT의 멤버변수로 사각형의 좌표에 대한 정보
       - 위 코드의 경우 update된 전체 영역을 rcPaint로 넘김
@@ -339,7 +326,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         ```
 
 - DefWindowProc() 부분
-
   - default message handler
   - 따로 처리하지 않을 몇몇 메세지들을 이 함수로 넘겨 디폴트대로 처리함.
 
