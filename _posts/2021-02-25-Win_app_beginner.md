@@ -15,18 +15,6 @@ toc_sticky: true
 date: 2021-02-25
 last_modified_at: 2021-02-25
 ---
-과제
-4주차 과제는 Windows 데스크톱 앱 개발로 5주차 과제에 선행하여 필요합니다.
-- [필수 1] 직접 프로젝트를 생성하거나 샘플을 다운받아서 Windows 데스크톱 앱을 만듭니다. (Link 1, 2)
-- [필수 2] 소스 코드를 설명합니다. 주석을 달아도 되고 소스코드와 별도로 각 요소들을 설명하는 글을 작성해도 좋습니다. 함수 정보는 Microsoft Docs에서 검색해주세요.
-- [선택 1] Windows의 창에 대해 배우고 이를 응용하여 그림을 그리거나 창을 닫기 전 알림을 띄우는 등의 코드를 작성해봅니다.
-- [선택 2] 작성한 Windows 데스크톱 앱을 x86-32 디버거(Visual Studio 내장 디버거, x64dbg 등)를 사용하여 소스코드와 비교하며 관찰합니다.
-- [선택 3] Windows의 클래스, 프로시저, 메시지 등에 대해 공부합니다. (Link 4)
-
-Link 1 - 최소한의 Windows 데스크톱 프로그램 작성: https://docs.microsoft.com/en-us/windows/win32/learnwin32/your-first-windows-program
-Link 2 - Windows Hello World 샘플 다운로드: https://docs.microsoft.com/en-us/windows/win32/learnwin32/windows-hello-world-sample
-Link 3 - Win32 API 문서 (기능 기준): https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list
-Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/windows
 
 ## 0. 개요   
 #### 1) 목표
