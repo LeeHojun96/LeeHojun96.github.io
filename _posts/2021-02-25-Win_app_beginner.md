@@ -1,6 +1,6 @@
 ---
 
-layout : single
+layout : post
 title:  "Win Application 기본"
 excerpt: "기본적인 Win app 개발 샘플 정리"
 
