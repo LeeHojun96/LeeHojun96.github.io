@@ -16,8 +16,10 @@ date: 2021-02-25
 last_modified_at: 2021-02-25
 ---
 
-## 0. 개요   
+## 0. 개요
+
 #### 1) 목표
+
 - 가장 기본적인 Windows application의 소스코드 분석
 
 #### 2) 분석 대상
@@ -27,6 +29,7 @@ last_modified_at: 2021-02-25
 - 샘플 프로그램 기능 : 사용자가 종료 전까지 빈 윈도우 창을 띄움.
 
 ## 1. 사용할 문자셋(character set) 정의     
+
 ```cpp
 #ifndef UNICODE
 #define UNICODE
@@ -36,14 +39,17 @@ last_modified_at: 2021-02-25
 ```
 
 #### 1) Windows 스타일 자료형이 정의되어 있는 'windows.h'
+
   - CHAR, WCHAR, LPSTR 등이 정의되어 있음
 
 #### 2) 매크로 UNICODE와 같이 사용하여 WBCS의 지원하는 'windows.h'
+
 - WBCS(Wide Byte Character Set) : 모든 문자를 2바이트로 표현하는 방식. 보통 유니코드 기반으로 함.
 - MBCS(Multi Byte Character Set) : 다양한 바이트 수를 사용해 문자를 표현하는 방식. 보통 아스키코드에서 정의하고 있는 문자들은 1바이트로, 아스키코드에서 정의하지 않는 다른 문자들은 2바이트로 표현.
 
 - windows.h 헤더에는 WBCS와 MBCS를 동시에 수용하는 형태의 프로그램을 위해 매크로가 정의되어 있음.   
 => 매크로 UNICODE가 정의되었는가 아닌가에 따라 코드가 다른 형태로 치환됨.
+
   - TCHAR, LPTSTR 등의 T가 붙은 자료형이 매크로 UNICODE가 정의되었는가 아닌가에 따라 다르게 바뀜.   
   단, T자료형은 tchar.h은 windows.h에 포함되어 있지 않으므로 따로 include되어야 함.
   ```cpp
@@ -100,12 +106,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     RegisterClass(&wc);
 ```
+
 - Window class 개념
+
   - 만들어질 윈도우 창의 여러 특성들을 정의하는 구조체   
   ex) 버튼의 수, 메시지 처리 함수, 스타일 등  
   - WNDCLASS 구조체 인스턴스로 구현.
   - Window class는 C++에서의 class와 다른 개념으로 OS에서 사용되는 데이터 구조체.
+
 - WNDCLASS 구조체
+
   ```cpp
   typedef struct tagWNDCLASSA {
   UINT      style;
@@ -120,11 +130,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
   LPCSTR    lpszClassName;
   } WNDCLASSA, *PWNDCLASSA, *NPWNDCLASSA, *LPWNDCLASSA;
   ```
+
   - 샘플 소스에 제시된 멤버변수 설명
+
     - lpfnWndProc : 윈도우의 메세지 처리 함수 지정. 메세지가 발생할 때마다 이 멤버가 지정하는 함수가 호출되며 이 함수가 모든 메시지를 처리
     - hInstance : 이 윈도우 클래스를 등록하는 '프로그램의 번호'이며 WinMain의 인수로 전달된 hInstance값을 그대로 대입하면 됨.   
     OS는 이 번호를 통해 어떤 프로그램에서 등록했는지 기억해두었다가 프로그램이 종료되면 이 클래스의 등록을 취소함.    
     - lpszClassName : 윈도우 클래스의 이름을 문자열로 정의. 여기서 지정한 이름은 후에 CreateWindow 함수에 전달하여 사용함.
+
 - RegisterClass 함수로 생성한 window class 등록
 RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이런 특성을 가진 윈도우를 앞으로 사용하겠다'는 등록 과정이며 OS는 이 윈도우 클래스의 특성을 기억해둠.
 
@@ -148,8 +161,10 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
         NULL        // Additional application data
         );
 ```
+
 - CreateWindowEx 함수로 윈도우 창을 생성하고 그 핸들을 변수 hwnd에 저장
 - CreateWindowEx()
+
   ```cpp
   HWND CreateWindowExA(
   DWORD     dwExStyle,
@@ -192,8 +207,8 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
 - 핸들이 정상적으로 전달됐으면 ShowWindow()로 윈도우 창을 사용자에게 보여줌
   - nCmdShow : 윈도우의 최대화, 최소화할 때 사용되는 값으로 main 함수의 인자를 통해 전달됨.
 
-
 ##### (3) 메세지 루프 부분
+
 ```cpp
     // Run the message loop.
 
@@ -213,6 +228,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
   ex) 유저의 마우스 클릭, 윈도우 OS의 sleep 모드 등의 이벤트
   - windows OS는 다양한 이벤트마다 대응하는 메세지를 상수값으로 정의함.   
   ex)
+
     ```cpp
     #define WM_LBUTTONDOWN    0x0201  # 마우스 좌클릭에 해당하는 메세지 코드
     ```
@@ -232,6 +248,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
   - DispatchMessage() 이전에 call됨
 
 - DispatchMessage(&msg);
+
   - OS로 하여 window procedure를 call하도록 함.
   - 위에 있는 WindowProc를 콜하는 것
 
@@ -279,14 +296,33 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 - 위 DispatchMessage() 함수로 call될 window procedure를 정의
 - switch 문
+
   - 입력받은 메세지 코드에 따라 분기됨
+  - WM_DESTROY
+
+    - 윈도우가 파괴(destroy)되었을 때 전달되는 메세지 코드
+    - PostQuitMessage() 함수 : 시스템에게 쓰레드가 종료 요청을 보냈음을 알려주는 함수. 보통 VM_DESTROY와 같이 쓰임
+
+  - WM_PAINT
+
+    - 윈도우에서의 paint 의미 : 윈도우 창 안에서 무언가를 보여주는 것
+    - 윈도우를 paint하라고 보내는 메세지 코드 :    
+    예시) 윈도우 창을 만들면서 OS는 이 창을 paint하라고 사용자에게 WM_PAINT 메세지를 보냄. 즉, 윈도우를 show하려면 사용자는 최소 한번 이상의 WM_PAINT 메세지를 받게 되는 것.   
+    창을 업데이트하면서 창의 일부를 다시 repaint하라고 해당 메세지 코드를 보내기도 함.
+    - BeginPaint()와 EndPaint()
+      painting 연산의 시작과 끝을 선언. 이 사이에서 모든 painting 작업이 이뤄져야 함.
+    - FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
+
 
 - DefWindowProc() 부분
+
   - default message handler
   - 따로 처리하지 않을 몇몇 메세지들을 이 함수로 넘겨 디폴트대로 처리함.
 
 ## 4. 정리
+
 ###### 윈도우 프로그래밍의 기본 형태
+
   - 윈도우 클래스 지정 (WNDCLASS)
   - 윈도우 클래스 등록 (RegisterClass)
   - 윈도우 생성 및 업데이트 (CreateWindow 및 UpdateWindow)
