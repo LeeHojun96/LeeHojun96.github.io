@@ -53,15 +53,16 @@ Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/w
 #include <windows.h>
 ```
 
-## 1) Windows 스타일 자료형이 정의되어 있는 'windows.h'
-
+## 1) 'windows.h' 헤더
+  
+  - Windows 스타일 자료형이 정의되어 있는 
   - CHAR, WCHAR, LPSTR 등이 정의되어 있음
 
-## 2) 매크로 UNICODE와 같이 사용하여 WBCS의 지원하는 'windows.h'
+## 2) 매크로 UNICODE
 
+- 매크로 UNICODE와 'windows.h'와 같이 사용하여 WBCS의 지원.
 - WBCS(Wide Byte Character Set) : 모든 문자를 2바이트로 표현하는 방식. 보통 유니코드 기반으로 함.
 - MBCS(Multi Byte Character Set) : 다양한 바이트 수를 사용해 문자를 표현하는 방식. 보통 아스키코드에서 정의하고 있는 문자들은 1바이트로, 아스키코드에서 정의하지 않는 다른 문자들은 2바이트로 표현.
-
 - windows.h 헤더에는 WBCS와 MBCS를 동시에 수용하는 형태의 프로그램을 위해 매크로가 정의되어 있음.   
 => 매크로 UNICODE가 정의되었는가 아닌가에 따라 코드가 다른 형태로 치환됨.
 
