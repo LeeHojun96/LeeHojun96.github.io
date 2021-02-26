@@ -209,7 +209,6 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
   - lpParam : 원하는 데이터를 파라미터로 넘길 때 사용됨. 추후에 상술
 
 ```cpp
-
     if (hwnd == NULL)
     {
         return 0;
@@ -266,6 +265,7 @@ RegisterClass 함수의 인수로 WNDCLASS 구조체의 주소를 전달. '이�
 
   - OS로 하여 window procedure를 call하도록 함.
   - 위에 있는 WindowProc를 콜하는 것
+
 
 # 3. Window procedure
 
@@ -353,6 +353,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   - 메시지 루프 (GetMessage 루프)
   - 메시지 처리함수 작성 (WindowProc)
 
-## 4.2. 참조
-https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-a-window
-https://docs.microsoft.com/en-us/windows/win32/learnwin32/window-messages
+-----
+
+**참조** 
+<https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-a-window>
+<https://docs.microsoft.com/en-us/windows/win32/learnwin32/window-messages>
