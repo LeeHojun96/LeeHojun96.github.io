@@ -87,7 +87,6 @@ Link 4 - Windows 개요: https://docs.microsoft.com/en-us/windows/win32/winmsg/w
   #endif
   ```  
 
-
 # 2. main 함수 부분
 
 ## 1) 전체 main 함수 형태
