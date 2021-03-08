@@ -341,6 +341,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 -----
 
-**참조** 
+**참조**
 <https://docs.microsoft.com/en-us/windows/win32/learnwin32/creating-a-window>
 <https://docs.microsoft.com/en-us/windows/win32/learnwin32/window-messages>
