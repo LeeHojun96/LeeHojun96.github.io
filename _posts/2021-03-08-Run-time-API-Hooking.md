@@ -69,14 +69,18 @@ Target.exe라는 샘플 프로그램의 메모리를 변조하거나 사용하�
 # 2. 메모리 변조를 통한 숨겨진 메시지 박스 표시
 - run-time 메모리 변조 프로그램을 만들기  
   - 실행되고 중인 Target.exe 프로세스의 메모리를 변조해 Target.exe에서 5를 입력했을 때 프로그램이 종료되지 않고 숨겨진 메세지가 나오도록 만들었다.
-- Target.exe에서 변조할 부분
+- Target.exe에서 변조할 부분   
+
   ```arm assembly
   jne target.402D71   // 주소 : 00402D6A  기계어 : 75 05
   ```
-  앞서 말한 첫번째 분기(0x402D6A)에서 무조건 점프하도록 위 코드를 다음과 같이 수정
+
+  앞서 말한 첫번째 분기(0x402D6A)에서 무조건 점프하도록 위 코드를 다음과 같이 수정   
+
   ```arm assembly
   jmp target.402D71   // 주소 : 00402D6A  기계어 : EB 05
   ```
+  
 - WriteProcessMemory()로 0x402D6A 주소의 명령어를 바꿈
 *Target.exe 변조 프로그램*
 ![기본화면](./img/2021-03-08-success2.png)
