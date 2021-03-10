@@ -39,7 +39,7 @@ Target.exe라는 샘플 프로그램의 메모리를 변조하거나 사용하�
 # 1. Target.exe  분석
 ### 1.1. 프로그램 동작   
 - 기본적으로 1~5까지의 입력을 받아 각 메뉴를 실행함
-  ![기본화면](./img/2021-03-08-success.png)
+  ![기본화면](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-success.png)
   - 1번 : 메세지 박스를 보여줌
   - 2번 : 메세지 박스의 내용물을 설정
     - display할 문자열을 입력받음
@@ -56,10 +56,10 @@ Target.exe라는 샘플 프로그램의 메모리를 변조하거나 사용하�
     - (3) 3번 선택 후 display할 문자열 입력
   - 이 중 첫 메뉴 선택에서의 입력값과 히든 메세지와 관련이 있을 것이라 가정하고 리버싱을 진행해본다
   - 첫 메뉴들을 프린트하는 부분 찾기 : 출력된 string으로 찾기
-  ![기본화면](./img/2021-03-08-mainprint.png)   
+  ![기본화면](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-mainprint.png)   
   - fgetchar()으로 메뉴 선택 입력값을 받는데 인접한 곳에서 숨겨진 메세지 박스와 관련된 string을 찾을 수 있었다
   - Hidden message 확인    
-  ![기본화면](./img/2021-03-08-hiddencode.png)
+  ![기본화면](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-hiddencode.png)
     - fgetchar()로 입력된 값은 5인지 2번 비교됨
     - 첫번째 분기(0x402D6A)에서 점프하고 두번째 분기(0x402D75)에서 점프하지 않을 시 히든 메세지가 출력되는 함수(0x402D81)가 call됨
 - ASLR 미적용 : 몇번 재실행해봐도 명령어들의 주소는 바뀌지 않음
@@ -80,12 +80,12 @@ Target.exe라는 샘플 프로그램의 메모리를 변조하거나 사용하�
   ```arm assembly
   jmp target.402D71   // 주소 : 00402D6A  기계어 : EB 05
   ```
-  
+
 - WriteProcessMemory()로 0x402D6A 주소의 명령어를 바꿈
 *Target.exe 변조 프로그램*
-![기본화면](./img/2021-03-08-success2.png)
+![기본화면](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-success2.png)
 *변조된 Target.exe*
-![기본화면](./img/2021-03-08-success.png)
+![기본화면](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-success.png)
 
 # 3. Target.exe 변조 프로그램 소스 코드
 ```c++
