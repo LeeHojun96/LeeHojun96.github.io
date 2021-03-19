@@ -62,7 +62,7 @@ Link 5 - 멤버 함수 후킹 (__fastcall 미사용): https://stackoverflow.com/
   - fgetchar()으로 메뉴 선택 입력값을 받는데 인접한 곳에서 숨겨진 메세지 박스와 관련된 string을 찾을 수 있었다
   - Hidden message 확인    
   ![c](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-hiddencode.png)
-    - fgetchar()로 입력된 값은 5인지 2번 비교됨
+    - fgetchar()로 입력된 값은 5와 2번 비교됨
     - 첫번째 분기(0x402D6A)에서 점프하고 두번째 분기(0x402D75)에서 점프하지 않을 시 히든 메세지가 출력되는 함수(0x402D81)가 call됨
 - ASLR 미적용 : 몇번 재실행해봐도 명령어들의 주소는 바뀌지 않음
   * ASLR : 메모리에 로딩될 때 ImageBase를 랜덤하게 바꾸는 기술
@@ -88,6 +88,16 @@ Link 5 - 멤버 함수 후킹 (__fastcall 미사용): https://stackoverflow.com/
 ![a](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-success2.png)
 *변조된 Target.exe*
 ![a](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-success.png)
+
+# 3. MessageBoxW 함수 후킹
+- MessageBoxW 함수의 위치 및 코드
+![a](https://github.com/LeeHojun96/LeeHojun96.github.io/blob/master/_posts/img/2021-03-08-messageboxw.png)
+
+### 3.1. MessageBoxW를 후킹하여 call될 때마다 로그가 출력되도록 변조
+
+### 3.2. MessageBoxW에 전달되는 인자 변조
+
+
 
 # 3. Target.exe 변조 프로그램 소스 코드
 ```c++
@@ -133,6 +143,7 @@ int main(void) {
 			wprintf(L"PID : %d\t", pe32.th32ProcessID);
 			wprintf(L"Name : %s\n", pe32.szExeFile);
 
+      // 프로세스 이름이 target.exe인 것 찾기 
 			targetNotExist = wcscmp(pe32.szExeFile, targetName);
 			if (targetNotExist) {
 				continue;
