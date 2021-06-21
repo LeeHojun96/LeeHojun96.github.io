@@ -12,8 +12,8 @@ tags:
 toc: true
 toc_sticky: true
 
-date: 2021-04-01
-last_modified_at: 2021-04-01
+date: 2021-05-07
+last_modified_at: 2021-05-07
 ---
 <!--
 10주차 과제는 디버깅 실습입니다
